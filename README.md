@@ -2,6 +2,6 @@
 
 ## TECH STACK
 
-React + TypeScript + Vite
+React + TypeScript + Tailwind
 
 ## Under Construction 👷‍♂️🏗

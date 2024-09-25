@@ -1,13 +1,35 @@
 import { Link } from "react-scroll";
 import NavLink from "../ui/NavLink";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [hasScrolled, setHasScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 32);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleCloseMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <header className="fixed 0 left-0 z-50 w-full py-10 ">
+    <header
+      className={clsx(
+        "fixed 0 left-0 z-50 w-full py-10 transition-all duration-300 max-lg:py-4",
+        hasScrolled ? "py-2 bg-black-100 backdrop-blur-[8px]" : ""
+      )}
+    >
       <div className="container flex h-14 items-center max-lg:px-5">
         <a className="lg:hidden flex-1 cursor-pointer z-2">
           <img src="/images/xora.svg" width={115} height={55} alt="logo" />
@@ -23,15 +45,23 @@ const Header = () => {
             <nav className="max-lg:relative max-lg:z-2 max-lg:my-auto">
               <ul className="flex max-lg:block max-lg:px-12">
                 <li className="nav-li">
-                  <NavLink to="/" title="Features" />
+                  <NavLink
+                    onClick={handleCloseMenu}
+                    to="features"
+                    title="Features"
+                  />
                   <div className="dot" />
-                  <NavLink to="/" title="Pricing" />
+                  <NavLink
+                    onClick={handleCloseMenu}
+                    to="pricing"
+                    title="Pricing"
+                  />
                 </li>
 
                 <li className="nav-logo">
                   <Link
                     to="hero"
-                    offset={-100}
+                    offset={-250}
                     spy
                     smooth
                     className={clsx(
@@ -48,9 +78,13 @@ const Header = () => {
                 </li>
 
                 <li className="nav-li">
-                  <NavLink to="/" title="FAQs" />
+                  <NavLink onClick={handleCloseMenu} to="faq" title="FAQs" />
                   <div className="dot" />
-                  <NavLink to="/" title="Download" />
+                  <NavLink
+                    onClick={handleCloseMenu}
+                    to="download"
+                    title="Download"
+                  />
                 </li>
               </ul>
             </nav>
