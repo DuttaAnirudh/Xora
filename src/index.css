@@ -201,4 +201,38 @@
     @apply after:g1 after:absolute after:right-0 after:top-0 after:h-full after:w-1/2 after:mix-blend-soft-light after:content-[''] max-md:after:hidden;
   }
   /* END of Feature */
+
+  /* START of Pricing */
+  .pricing-head_before {
+    @apply before:absolute before:-bottom-44 before:left-1/5 before:h-96 before:w-13/20 before:bg-s4/50 before:blur-[200px] before:content-[''];
+  }
+
+  .pricing-head_btn {
+    @apply base-bold relative z-2 h-16 flex-1 uppercase text-p5 transition-colors duration-500 hover:text-p4;
+  }
+
+  .pricing-head_btn_before {
+    @apply before:absolute before:-top-16 before:left-9 before:right-9 before:bg-s4 before:blur-xl before:content-[""];
+  }
+
+  .pricing-bg {
+    @apply pointer-events-none absolute -bottom-16 left-[calc(50%-480px)] z-2 mx-auto w-960;
+  }
+
+  .pricing-plan_first {
+    @apply first:rounded-bl-3xl first:rounded-tl-3xl lg:first:border-r-0;
+  }
+
+  .pricing-plan_last {
+    @apply last:rounded-br-3xl last:rounded-tr-3xl lg:last:border-l-0;
+  }
+
+  .pricing-plan_odd {
+    @apply odd:border-s3 odd:bg-s1 lg:odd:mt-12;
+  }
+
+  .pricing-plan_even {
+    @apply even:g7 even:rounded-bl-3xl even:rounded-br-3xl even:rounded-tl-3xl even:rounded-tr-3xl even:border-s4;
+  }
+  /* END of Pricing */
 }

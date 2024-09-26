@@ -10,7 +10,7 @@ const NavLink = ({ title, to, onClick }: NavLinkProps) => {
   return (
     <Link
       to={to}
-      offset={-100}
+      offset={-90}
       spy
       smooth
       activeClass="nav-active"
