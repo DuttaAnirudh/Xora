@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import "node_modules/react-slidedown/lib/slidedown.css";
 
 @tailwind base;
 @tailwind components;
@@ -268,4 +267,48 @@
     @apply after:pointer-events-none after:absolute after:-bottom-[212px] after:left-[calc(50%-5px)] after:z-2 after:size-2.5 after:rounded-half after:border-2 after:border-s5 after:bg-s1 after:content-[''] max-lg:after:-bottom-[102px] max-md:after:hidden;
   }
   /* END of Testimonials */
+
+  /*  START of Download*/
+  .download_tech-link_last-before {
+    @apply last:relative last:before:pointer-events-none last:before:absolute last:before:left-full last:before:top-[calc(50%-1px)] last:before:mr-6 last:before:h-0.5 last:before:w-[140px] last:before:bg-s5 last:before:content-[''] last:before:max-xl:w-[105px] last:before:max-lg:w-[80px] last:before:max-md:hidden;
+  }
+
+  .download_tech-link_last-after {
+    @apply last:after:pointer-events-none last:after:absolute last:after:left-[223px] last:after:top-[calc(50%-5px)] last:after:z-2 last:after:size-2.5 last:after:rounded-half last:after:border-2 last:after:border-s5 last:after:bg-s1 last:after:content-[''] last:after:max-xl:left-[187px] last:after:max-lg:left-[163px] last:after:max-md:hidden;
+  }
+
+  .download_tech-icon {
+    @apply relative z-2 flex size-full items-center justify-center transition-all duration-500;
+  }
+
+  .download_tech-icon_before {
+    @apply before:absolute before:inset-1.5 before:rounded-half before:bg-s2 before:content-[''] hover:border-s4;
+  }
+
+  .download_tech-link:hover .download_tech-icon svg path {
+    @apply fill-p1;
+  }
+
+  .download_preview-before {
+    @apply before:g8 before:absolute before:-top-0.5 before:right-6 before:h-0.5 before:w-[63.2%] before:opacity-40 before:content-[''];
+  }
+
+  .download_preview-after {
+    @apply after:g8 after:absolute after:-bottom-0.5 after:left-6 after:h-0.5 after:w-[42.2%] after:opacity-40 after:content-[''];
+  }
+
+  .download_preview-dot {
+    @apply absolute top-6 size-2.5 rounded-half;
+  }
+  /*  END of Download*/
+
+  /*  START of Footer */
+  .legal-after {
+    @apply after:absolute after:-right-5 after:top-[calc(50%-1px)] after:h-0.5 after:w-0.5 after:rounded-half after:bg-p2 after:content-[''];
+  }
+
+  .social-icon {
+    @apply flex size-10 items-center justify-center rounded-full border-2 border-s4/25 bg-s1/5 transition-all duration-500 hover:border-s4;
+  }
+  /*  END of Footer*/
 }
