@@ -2,10 +2,23 @@ import { Link } from "react-scroll";
 import NavLink from "../ui/NavLink";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [hasScrolled, setHasScrolled] = useState<boolean>(false);
+
+  const variantHeader = {
+    initial: { opacity: 0, y: "-100%" },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 1.1,
+        duration: 1.5,
+      },
+    },
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,11 +37,14 @@ const Header = () => {
   };
 
   return (
-    <header
+    <motion.header
       className={clsx(
         "fixed 0 left-0 z-50 w-full py-10 transition-all duration-300 max-lg:py-4",
         hasScrolled ? "py-2 bg-black-100 backdrop-blur-[8px]" : ""
       )}
+      variants={variantHeader}
+      initial="initial"
+      animate="animate"
     >
       <div className="container flex h-14 items-center max-lg:px-5">
         <a className="lg:hidden flex-1 cursor-pointer z-2">
@@ -119,7 +135,7 @@ const Header = () => {
           />
         </button>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

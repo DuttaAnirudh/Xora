@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 import Marker from "./Marker";
+import { motion } from "framer-motion";
 
 type ButtonProps = {
   icon?: string;
@@ -9,6 +10,7 @@ type ButtonProps = {
   className?: string;
   onClick?: () => void;
   markerFill?: string;
+  variants?: { initial: object; animate: object };
 };
 
 const Button = ({
@@ -18,6 +20,7 @@ const Button = ({
   className,
   onClick,
   markerFill,
+  variants,
 }: ButtonProps) => {
   const Inner = () => (
     <>
@@ -52,7 +55,8 @@ const Button = ({
       <Inner />
     </a>
   ) : (
-    <button
+    <motion.button
+      variants={variants}
       onClick={onClick}
       className={clsx(
         "relative p-0.5 g5 rounded-2xl shadow-500 group",
@@ -60,7 +64,7 @@ const Button = ({
       )}
     >
       <Inner />
-    </button>
+    </motion.button>
   );
 };
 

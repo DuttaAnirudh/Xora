@@ -1,12 +1,35 @@
 import { Element } from "react-scroll";
 import { details, features } from "../../constants";
 import Button from "../ui/Button";
+import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 const Features = () => {
+  const sectionRef = useRef(null);
+  const detailsRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end end"],
+  });
+  const scaleSection = useTransform(scrollYProgress, [0, 0.7], ["0.4", "1"]);
+
+  const variantDetails = {
+    initial: { scale: 0.2 },
+    animate: {
+      scale: [0.2, 1.2, 1],
+      transition: {
+        duration: 0.8,
+        type: "spring",
+      },
+    },
+  };
+  const detailBoxInView = useInView(detailsRef);
+
   return (
-    <section>
+    <motion.section ref={sectionRef} style={{ scale: scaleSection }}>
       <Element name="features">
-        <div className="contaienr">
+        <div className="container">
           <div className="relative flex md:flex-wrap flex-nowrap border-2 border-s3 rounded-7xl md:overflow-hidden max-md:flex-col feature-after md:g7 max-md:border-none max-md:rounded-none max-md:gap-3">
             {features.map((feature) => (
               <div
@@ -24,15 +47,15 @@ const Features = () => {
                   </div>
                 </div>
 
-                <p className="caption mb-5 max-md:mb-6 max-md:h5">
+                <motion.p className="caption mb-5 max-md:mb-6 max-md:h6">
                   {feature.caption}
-                </p>
-                <h2 className="max-w-400 mb-7 h3 text-p4 max-md:mb-6 max-md:h5">
+                </motion.p>
+                <motion.h2 className="max-w-400 mb-7 h3 text-p4 max-md:mb-6 max-md:h5">
                   {feature.title}
-                </h2>
-                <p className="mb-11 body-1 max-md:mb-8 max-md:body-3">
+                </motion.h2>
+                <motion.p className="mb-11 body-1 max-md:mb-8 max-md:body-3">
                   {feature.text}
-                </p>
+                </motion.p>
                 <Button icon={feature.button.icon}>
                   {feature.button.title}
                 </Button>
@@ -45,23 +68,33 @@ const Features = () => {
                 <li key={detail.id} className="relative pt-16 px-4 pb-14">
                   <div className="absolute top-8 bottom-0 left-1/2 bg-s3/20 w-[1px] h-full" />
                   <div className="flex items-center justify-center mx-auto mb-3 border-2 border-s3 rounded-full hover:border-s4 transition-all duration-500 shadow-500 size-20">
-                    <img
+                    <motion.img
                       src={detail.icon}
                       alt={detail.title}
                       className="size-17/20 object-contain z-20"
+                      ref={detailsRef}
+                      variants={variantDetails}
+                      initial="initial"
+                      animate={detailBoxInView && "animate"}
                     />
                   </div>
 
-                  <h3 className="relative z-2 max-w-36 mx-auto my-0 base-small text-center uppercase">
+                  <motion.h3
+                    className="relative z-2 max-w-36 mx-auto my-0 base-small text-center uppercase"
+                    ref={detailsRef}
+                    variants={variantDetails}
+                    initial="initial"
+                    animate={detailBoxInView && "animate"}
+                  >
                     {detail.title}
-                  </h3>
+                  </motion.h3>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </Element>
-    </section>
+    </motion.section>
   );
 };
 

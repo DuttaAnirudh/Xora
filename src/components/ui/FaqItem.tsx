@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import SlideDown from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
+import { motion } from "framer-motion";
 
 type FaqProp = {
   faq: {
@@ -10,15 +11,16 @@ type FaqProp = {
     answer: string;
   };
   index: number;
+  variants?: { initial: object; animate: object };
 };
 
-const FaqItem = ({ faq, index }: FaqProp) => {
+const FaqItem = ({ faq, index, variants }: FaqProp) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const active = activeId === faq.id;
 
   return (
-    <div className="relative z-2 mb-16">
+    <motion.div variants={variants} className="relative z-2 mb-16">
       <div
         onClick={() => {
           setActiveId(activeId === faq.id ? null : faq.id);
@@ -63,7 +65,7 @@ const FaqItem = ({ faq, index }: FaqProp) => {
         <div className="g4 absolute inset-0.5 -z-1 rounded-3xl" />
         <div className="absolute left-8 top-0 h-0.5 w-40 bg-p1" />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

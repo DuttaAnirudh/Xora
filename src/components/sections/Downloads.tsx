@@ -5,6 +5,8 @@ import Ios from "../ui/Ios";
 import Android from "../ui/Android";
 import Windows from "../ui/Windows";
 import Web from "../ui/Web";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface LinkItem {
   id: string;
@@ -41,11 +43,41 @@ const links: LinkItem[] = [
 ];
 
 const Downloads = () => {
+  const clientLogosRef = useRef(null);
+  const appLogosRef = useRef(null);
+
+  const variantClientsLogo = {
+    initial: { y: 45, opacity: 0 },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.45,
+        staggerChildren: 0.4,
+      },
+    },
+  };
+
+  const variantAppLogo = {
+    initial: { x: 45, opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.45,
+        staggerChildren: 0.4,
+      },
+    },
+  };
+
+  const clientLogoInView = useInView(clientLogosRef);
+  const appLogoInView = useInView(appLogosRef);
+
   return (
     <section>
       <Element
         name="download"
-        className="g7 relative pb-32 pt-24 max-lg:pb-24 max-md:py-1"
+        className="g7 relative pb-32 pt-24 max-lg:pb-24 max-md:py-12"
       >
         <div className="container">
           <div className="flex items-center">
@@ -64,11 +96,18 @@ const Downloads = () => {
                 favor, we've got you covered
               </p>
 
-              <ul className="flex flex-wrap items-center gap-6">
+              <motion.ul
+                className="flex flex-wrap items-center gap-6"
+                ref={appLogosRef}
+                variants={variantAppLogo}
+                initial="initial"
+                animate={appLogoInView && "animate"}
+              >
                 {links.map((link) => (
-                  <li
+                  <motion.li
                     key={link.id}
                     className="download_tech-link download_tech-link_last-before download_tech-link_last-after"
+                    variants={variantAppLogo}
                   >
                     <a
                       href={link.url}
@@ -84,9 +123,9 @@ const Downloads = () => {
                       />
                       <span className="download_tech-icon">{link.icon}</span>
                     </a>
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
+              </motion.ul>
             </div>
 
             <div className="mb-10 max-md:hidden">
@@ -108,18 +147,28 @@ const Downloads = () => {
             </div>
           </div>
 
-          <ul className="mt-24 flex justify-center max-lg:hidden">
+          <motion.ul
+            ref={clientLogosRef}
+            className="mt-24 flex justify-center max-lg:hidden"
+            variants={variantClientsLogo}
+            initial="initial"
+            animate={clientLogoInView && "animate"}
+          >
             {logos.map((logo) => (
-              <li className="mx-10" key={logo.id}>
+              <motion.li
+                className="mx-10"
+                key={logo.id}
+                variants={variantClientsLogo}
+              >
                 <img
                   src={logo.url}
                   width={logo.width}
                   height={logo.height}
                   alt={logo.title}
                 />
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
       </Element>
     </section>
