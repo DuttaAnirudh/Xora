@@ -65,7 +65,7 @@ const Hero = () => {
 
           <div className="absolute -top-32 left-[calc(50%-340px)] w-[1230px] pointer-events-none hero-img_res">
             <motion.img
-              src="/images/hero.png"
+              src="/images/hero.webp"
               className="size-1230 max-lg:h-auto"
               alt="hero image"
               variants={variantImageHero}
